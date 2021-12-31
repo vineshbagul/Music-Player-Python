@@ -17,6 +17,10 @@ pause_img = tk.PhotoImage(file ="pause_img.png")
 next_img = tk.PhotoImage(file ="next_img.png")
 
 
+def select():
+    label.config(text =listBox.get("anchor"))
+    mixer.music.load(rootpath + "\\" + listBox.get("anchor"))
+    mixer.music.play()
 
 
 listBox = tk.Listbox(canvas, fg="cyan", bg="black", width=100 , font =('poppins',17))
@@ -35,7 +39,7 @@ stopButton = tk.Button(canvas,text="stop")
 stopButton.pack ( pady= 15, in_ = top ,side ='left', image = stop_img , bg= 'black', borderwidth=0 ) 
 
 playButton = tk.Button(canvas,text="play")
-playButton.pack(pady= 15, in_ = top ,side ='left', image = play_img , bg= 'black', borderwidth=0 ) 
+playButton.pack(pady= 15, in_ = top ,side ='left', image = play_img , bg= 'black', borderwidth=0 ,command = select ) 
 
 nextButton = tk.Button(canvas,text="next")
 nextButton.pack(pady= 15, in_ = top ,side ='left' ,image = next_img , bg= 'black' ,borderwidth=0 ) 
