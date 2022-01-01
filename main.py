@@ -2,6 +2,7 @@ import tkinter as tk
 import fnmatch 
 import os
 from pygame import mixer
+from pygame.music import play
 canvas = tk.Tk();
 canvas.title("Music Player")
 canvas.geometry("600x600")
@@ -26,6 +27,16 @@ def stop():
     mixer.music.stop()
     listBox.select_clear('active')
 
+def pause_song():
+    if pauseButton['text'] == "pause":
+        mixer.music.pause()
+        pauseButton['text'] = "play"
+        else:
+            mixer.music.unpause()
+            pauseButton["text"] ="pause"
+
+
+
 
 listBox = tk.Listbox(canvas, fg="cyan", bg="black", width=100 , font =('poppins',17))
 listBox.pack(padx =15 , pady =15) 
@@ -49,7 +60,7 @@ nextButton = tk.Button(canvas,text="next")
 nextButton.pack(pady= 15, in_ = top ,side ='left' ,image = next_img , bg= 'black' ,borderwidth=0 ) 
 
 pauseButton = tk.Button(canvas,text="pause")
-pauseButton.pack(pady= 15, in_ = top ,side ='left' ,image = pause_img , bg= 'black' ,borderwidth=0 ) 
+pauseButton.pack(pady= 15, in_ = top ,side ='left' ,image = pause_img , bg= 'black' ,borderwidth=0 command = pause_song ) 
 
 for root ,dirs ,files in os.walk(rootpath):
     for filename in fnmatch.filter(files,pattern):
